@@ -132,3 +132,15 @@ Connecting to database specified by database.yml
 Connecting to database specified by database.yml
 Connecting to database specified by database.yml
 Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+  [1m[36m (3.1ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (1.4ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.3ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateAttendees (20130717225211)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.5ms)[0m  [1mCREATE TABLE "attendees" ("id" serial primary key, "user_id" integer, "event_id" integer) [0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20130717225211')
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+Migrating to CreateUsers (20130717225858)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
