@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+
   def index
   end
 
@@ -19,4 +20,5 @@ class EventsController < ApplicationController
 
   def destroy
   end
+  
 end
