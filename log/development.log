@@ -125,3 +125,4 @@ PG::Error (could not connect to server: No such file or directory
   Rendered /Users/Torey/.rvm/gems/ruby-1.9.3-p385@rails3tutorial2ndEd/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.1ms)
   Rendered /Users/Torey/.rvm/gems/ruby-1.9.3-p385@rails3tutorial2ndEd/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.9ms)
   Rendered /Users/Torey/.rvm/gems/ruby-1.9.3-p385@rails3tutorial2ndEd/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (16.5ms)
+Connecting to database specified by database.yml
