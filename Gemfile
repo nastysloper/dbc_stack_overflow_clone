@@ -20,7 +20,23 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'twitter'
+gem 'oauth'
+gem 'carrierwave'
+gem 'minimagick'
+
 gem 'jquery-rails'
+
+group :test, :development do
+  gem 'rspec-rails', '~> 2.0'
+  gem 'faker'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+end
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
