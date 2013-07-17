@@ -23,7 +23,7 @@ end
 gem 'twitter'
 gem 'oauth'
 gem 'carrierwave'
-gem 'minimagick'
+gem 'mini_magick'
 
 gem 'jquery-rails'
 
