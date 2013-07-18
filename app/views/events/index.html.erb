@@ -1,0 +1,8 @@
+<h1>What's Happening at DBC</h1>
+<ul>
+<% @events.each do |event| %>
+  <li><%= event.title %><br>
+  <%= event.start %>
+  </li>
+<% end %>
+</ul>
