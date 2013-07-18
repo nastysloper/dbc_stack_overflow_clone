@@ -23,7 +23,14 @@ describe Event do
   end
 
   context "uploading image" do
-    pending
+    it "saves an upload to photo_file" do
+      filepath = File.join(Rails.root, "spec/fixtures/otters_logo.png")
+      event = Event.new
+      event.photo_file = File.new(filepath)
+      event.save
+
+      event.photo_file.should_not be_nil
+    end
   end
 
 end
