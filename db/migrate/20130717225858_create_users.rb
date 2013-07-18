@@ -3,6 +3,7 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.string :oauth_token
       t.string :oauth_secret
+      t.string :twitter_handle
 
       t.timestamps
     end
