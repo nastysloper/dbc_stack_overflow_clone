@@ -1,0 +1,17 @@
+<h1>Welcome to Our App!</h1>
+
+<% if @user %>
+    <div>
+      <form action="/" method="post">
+        <label for="tweet">Tweet: </label>
+        <input name="tweet" type="text">
+        <input type="submit" value="Submit" id="submit">
+        <img src="/images/ajax-loader.gif" id="wait">
+      </form>
+      <p>
+        <button><a href="/sign_out">Sign Out</a></button>
+      </p>
+    </div>
+  <% else %>
+    <button><a href="/sign_in">Sign In with Twitter</a></button>
+<% end %>
