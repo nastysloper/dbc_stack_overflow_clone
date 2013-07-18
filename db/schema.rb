@@ -18,11 +18,50 @@ ActiveRecord::Schema.define(:version => 20130717230105) do
     t.integer "event_id"
   end
 
+  create_table "comments", :force => true do |t|
+    t.text     "text"
+    t.integer  "author_id"
+    t.integer  "event_id"
+    t.integer  "parent_id"
+    t.boolean  "endorsed",   :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "event_tags", :force => true do |t|
+    t.integer "event_id"
+    t.integer "tag_id"
+  end
+
+  create_table "events", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "start"
+    t.datetime "end"
+    t.string   "photo_file"
+    t.integer  "organizer_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "oauth_token"
     t.string   "oauth_secret"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.string   "twitter_handle"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "voter_id"
+    t.integer  "comment_id"
+    t.integer  "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
