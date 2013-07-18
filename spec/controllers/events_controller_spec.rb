@@ -54,7 +54,6 @@ describe EventsController do
       end
 
       it 'saves a new event' do
-        session[:user_id] = 1
         count = Event.all.count
         post :create, event: @attrs
         Event.all.count.should eq count + 1

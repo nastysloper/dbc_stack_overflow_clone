@@ -11,18 +11,6 @@ describe CommentsController do
     @attrs = {text: 'test comment text'}
   end
 
-  describe '#create' do
-    it 'redirects if user not logged in' do
-      pending
-    end
-
-    it 'should save a new comment' do
-      count = Comment.all.count
-      post :create, comment: @attrs
-      Comment.all.count.should eq count + 1
-    end
-  end
-
   describe '#update' do
     it 'redirects if logged in user is not original commenter' do
       pending
@@ -56,10 +44,9 @@ describe CommentsController do
       end
 
       it 'saves a new event' do
-        session[:user_id] = 1
-        count = Event.all.count
+        count = Comment.all.count
         post :create, event: @attrs
-        Event.all.count.should eq count + 1
+        Comment.all.count.should eq count + 1
       end
     end
 
@@ -69,9 +56,9 @@ describe CommentsController do
       end
 
       it 'doesnt save' do
-        count = Event.all.count
+        count = Comment.all.count
         post :create, event: @attrs
-        Event.all.count.should eq count
+        Comment.all.count.should eq count
       end
     end
   end
