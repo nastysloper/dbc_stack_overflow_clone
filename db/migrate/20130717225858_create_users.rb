@@ -5,8 +5,10 @@ class CreateUsers < ActiveRecord::Migration
       t.string :oauth_secret
 
       t.timestamps
+    end
   end
 
   def down
+    drop_table :users
   end
 end
