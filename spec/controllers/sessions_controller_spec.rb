@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SesssionsController do
+describe SessionsController do
   describe '#auth' do
     it "can't be tested?" do
       pending

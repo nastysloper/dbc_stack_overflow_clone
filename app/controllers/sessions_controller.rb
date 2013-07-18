@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
-
+  skip_before_filter :require_login
+  
   def sign_in
     redirect_to request_token.authorize_url
   end
