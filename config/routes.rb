@@ -4,7 +4,8 @@ StackClone::Application.routes.draw do
 
   resources :events
 
-  resources :comments , :only => [:create, :edit, :destroy]
+  resources :comments , :only => [:create, :update, :destroy]
+  resources :votes , :only => [:create, :update, :destroy]
 
   match 'session/auth', to: 'sessions#auth'
 
