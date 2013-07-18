@@ -2,13 +2,14 @@ require 'spec_helper'
 
 describe EventsController do
   before(:all) do
-    user = User.create
-    Event.create(organizer: user, title: 'test title', start: Time.now, description: 'test description')
+    User.delete_all
+    @user = User.create
+    @event = Event.create(organizer: @user, title: 'test title', start: Time.now, description: 'test description')
     User.create
   end
 
   before(:each) do
-    @attrs = {title: 'test title', start: Time.now, description: 'test description'}
+    @attrs = {organizer_id: @user.id, title: 'test title', start: Time.now, description: 'test description'}
   end
 
   describe '#index' do
@@ -22,9 +23,9 @@ describe EventsController do
   end
 
   describe '#new' do
-    context 'user logged in' do
+    context 'when user logged in' do
       before(:each) do
-        session[:user_id] = 1
+        session[:user_id] = @user.id
       end
 
       it 'assigns @event to an unsaved event' do
@@ -35,7 +36,7 @@ describe EventsController do
       end
     end
 
-    context 'user not logged in' do
+    context 'when user not logged in' do
       before(:each) do
         session.clear
       end    
@@ -48,9 +49,9 @@ describe EventsController do
   end
 
   describe '#create' do
-    context 'user logged in' do
+    context 'when user logged in' do
       before(:each) do
-        session[:user_id] = 1
+        session[:user_id] = @user.id
       end
 
       it 'saves a new event' do
@@ -60,7 +61,7 @@ describe EventsController do
       end
     end
 
-    context 'user not logged in' do
+    context 'when user not logged in' do
       before(:each) do
         session.clear
       end
@@ -75,28 +76,28 @@ describe EventsController do
 
   describe '#show' do
     it 'assigns @event to Event with given id' do
-      get :show, :id => 1
+      get :show, :id => @event.id
       event = assigns(:event)
       event.kind_of?(Event).should be_true
-      event.id.should be 1
+      event.id.should be @event.id
     end
   end
 
   describe '#edit' do
-    context 'user logged in' do
+    context 'when user logged in' do
       before(:each) do
-        session[:user_id] = 1
+        session[:user_id] = @user.id
       end
 
       it 'assigns @event to Event with given id' do
-        get :edit, :id => 1
+        get :edit, :id => @event.id
         event = assigns(:event)
         event.kind_of?(Event).should be_true
-        event.id.should be 1
+        event.id.should be @event.id
       end
     end
 
-    context 'user not logged in' do
+    context 'when user not logged in' do
       before(:each) do
         session[:user_id] = 2
       end
@@ -109,29 +110,29 @@ describe EventsController do
   end
 
   describe '#update' do
-    context 'user logged in' do
+    context 'when user logged in' do
       before(:each) do
-        session[:user_id] = 1
+        session[:user_id] = @user.id
       end
 
       it 'updates the event at given id' do
-        event = Event.find(1)
+        event = Event.create(@attrs)
         attrs = {title: 'updated test title', start: Time.now, description: 'test description'}
-        post :update, :id => 1, event: attrs
+        post :update, :id => event.id, event: attrs
         event.reload
         event.title.should eq 'updated test title'
       end
     end
 
-    context 'user not logged in' do
+    context 'when user not logged in' do
       before(:each) do
         session[:user_id] = 2
       end
 
-      it 'redirects if logged in user is not organizer' do
-        event = Event.find(1)
+      it 'doesnt update if logged in user is not organizer' do
+        event = Event.create(@attrs)
         attrs = {title: 'updated test title', start: Time.now, description: 'test description'}
-        post :update, :id => 1, event: attrs
+        post :update, :id => event.id, event: attrs
         event.reload
         event.title.should eq 'test title'
       end
@@ -139,9 +140,9 @@ describe EventsController do
   end
 
   describe '#destroy' do
-    context 'user logged in' do
+    context 'when user logged in' do
       before(:each) do
-        session[:user_id] = 1
+        session[:user_id] = @user.id
       end
 
       it 'destroys the object with the given id' do
@@ -151,7 +152,7 @@ describe EventsController do
       end
     end
 
-    context 'user not logged in' do
+    context 'when user not logged in' do
       before(:each) do
         session[:user_id] = 2
       end
