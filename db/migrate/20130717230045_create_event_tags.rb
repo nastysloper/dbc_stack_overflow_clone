@@ -7,5 +7,6 @@ class CreateEventTags < ActiveRecord::Migration
   end
 
   def down
+    drop_table :event_tags
   end
 end

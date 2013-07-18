@@ -10,5 +10,6 @@ class CreateVotes < ActiveRecord::Migration
   end
 
   def down
+    drop_table :votes
   end
 end
