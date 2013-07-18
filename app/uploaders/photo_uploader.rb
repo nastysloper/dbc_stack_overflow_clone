@@ -9,7 +9,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
   end
 
   def store_dir
-    'public/uploads/photos'
+    'uploads/photos'
   end
 
 end
