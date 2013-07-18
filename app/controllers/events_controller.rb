@@ -1,5 +1,11 @@
 class EventsController < ApplicationController
   skip_before_filter :require_login, only: [:index, :show]
+  before_filter :user_created_event, only: [:edit, :update, :destroy]
+
+  def user_created_event
+    @event = current_user.created_events.find_by_id(params[:id])
+    redirect_to '/' unless @event
+  end
 
   def index
     @events = Event.all
@@ -19,19 +25,15 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @event = current_user.created_events.find_by_id(params[:id])
-    redirect_to '/' unless @event
   end
 
   def update
-    event = current_user.created_events.find_by_id(params[:id])
-    event.update_attributes(params[:event]) if event
+    @event.update_attributes(params[:event])
     redirect_to '/'
   end
 
   def destroy
-    event = current_user.created_events.find_by_id(params[:id])
-    event.destroy if event
+    @event.destroy
     redirect_to '/'
   end
   
