@@ -6,9 +6,9 @@ StackClone::Application.routes.draw do
 
   resources :comments , :only => [:create, :edit, :destroy]
 
-  match 'user/auth', to: 'users#auth'
+  match 'session/auth', to: 'sessions#auth'
 
-  match '/sign_in', to: 'users#sign_in'
-  match '/sign_out', to: 'users#sign_out'
+  match '/sign_in', to: 'sessions#sign_in'
+  match '/sign_out', to: 'sessions#sign_out'
 
 end
