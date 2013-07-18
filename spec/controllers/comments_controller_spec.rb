@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe CommentsController do
   before(:all) do
-    Comment.create(text: 'test comment text')
+    user = User.create
+    Comment.create(author: user, text: 'test comment text')
+    User.create
   end
 
   before(:each) do
@@ -44,6 +46,33 @@ describe CommentsController do
       comment = Comment.create(@attrs)
       post :destroy, :id => comment.id
       expect {comment.reload}.to raise_error(ActiveRecord::RecordNotFound)
+    end
+  end
+
+  describe '#create' do
+    context 'user logged in' do
+      before(:each) do
+        session[:user_id] = 1
+      end
+
+      it 'saves a new event' do
+        session[:user_id] = 1
+        count = Event.all.count
+        post :create, event: @attrs
+        Event.all.count.should eq count + 1
+      end
+    end
+
+    context 'user not logged in' do
+      before(:each) do
+        session.clear
+      end
+
+      it 'doesnt save' do
+        count = Event.all.count
+        post :create, event: @attrs
+        Event.all.count.should eq count
+      end
     end
   end
 end

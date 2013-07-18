@@ -8,7 +8,7 @@ describe EventsController do
   end
 
   before(:each) do
-    @attrs = {organizer_id: 1, title: 'test title', start: Time.now, description: 'test description'}
+    @attrs = {title: 'test title', start: Time.now, description: 'test description'}
   end
 
   describe '#index' do
@@ -45,7 +45,6 @@ describe EventsController do
         response.should_not be_success
       end
     end
-
   end
 
   describe '#create' do
@@ -73,7 +72,6 @@ describe EventsController do
         Event.all.count.should eq count
       end
     end
-
   end
 
   describe '#show' do
@@ -109,8 +107,6 @@ describe EventsController do
         response.should_not be_success
       end
     end
-
-
   end
 
   describe '#update' do
@@ -167,7 +163,5 @@ describe EventsController do
         expect {event.reload}.to_not raise_error
       end
     end
-
-    
   end
 end
