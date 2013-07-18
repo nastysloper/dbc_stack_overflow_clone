@@ -1,6 +1,8 @@
 class Event < ActiveRecord::Base
   require 'carrierwave/orm/activerecord'
 
+  attr_accessible :title, :start, :description, :organizer, :organizer_id
+
   validates :title, :presence => true
   validates :start, :presence => true
   validates :description, :presence => true
