@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
     if @user
       @user.update_attributes(oauth_token: @access_token.token, oauth_secret: @access_token.secret)
     else
-      @user = User.create(id: @access_token.params[:user_id], oauth_token: @access_token.token, oauth_secret: @access_token.secret)
+      @user = User.create(id: @access_token.params[:user_id], oauth_token: @access_token.token, oauth_secret: @access_token.secret, twitter_handle: @access_token.params[:screen_name])
     end
 
     session[:user_id] = @user.id
