@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-
+  attr_accessible :oauth_token, :oauth_secret
+  
   has_many :created_events, :class_name => "Event", :foreign_key => :organizer_id
   has_many :attendees
   has_many :attended_events, :through => :attendees, :source => :events
