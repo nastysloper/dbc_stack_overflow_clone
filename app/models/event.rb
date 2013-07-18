@@ -7,7 +7,7 @@ class Event < ActiveRecord::Base
 
   belongs_to :organizer, :class_name => "User"
   has_many :attendees
-  has_many :participants, :through => :attendees, :source => :users
+  has_many :participants, :through => :attendees, :source => :user
   has_many :event_tags
   has_many :tags, :through => :event_tags
   has_many :comments

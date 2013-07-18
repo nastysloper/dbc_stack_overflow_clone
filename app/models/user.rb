@@ -3,10 +3,10 @@ class User < ActiveRecord::Base
   
   has_many :created_events, :class_name => "Event", :foreign_key => :organizer_id
   has_many :attendees
-  has_many :attended_events, :through => :attendees, :source => :events
+  has_many :attended_events, :through => :attendees, :source => :event
   has_many :votes, :foreign_key => :voter_id
   has_many :comments, :foreign_key => :author_id
-  has_many :voted_on_comments, :through => :votes, :source => :comments
+  has_many :voted_on_comments, :through => :votes, :source => :comment
 
 
   def twitter_client
