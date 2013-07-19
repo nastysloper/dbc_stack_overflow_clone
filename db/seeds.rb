@@ -1,10 +1,10 @@
 # Methods used in create entries
 def random_user
-	User.all.sample
+	$all_users.sample
 end
 
 def random_event
-	Event.all.sample
+	$all_events.sample
 end
 
 def random_tag
@@ -12,7 +12,7 @@ def random_tag
 end
 
 def random_comment
-	Comment.all.sample
+	$all_comments.sample
 end
 
 def generate_start_date
@@ -33,13 +33,15 @@ end
 
 
 # Create users
-75.times do
+50.times do
 	User.create(twitter_handle: Faker::Internet.user_name)
 end
 
+$all_users = User.all
+
 
 # Create events
-100.times do
+40.times do
 	start_date = generate_start_date
 	random_user.created_events.create( { :title => Faker::Lorem.sentence([4,5,6,7].sample),
 																			 :description => Faker::Lorem.paragraph([1,2,3,4,5,6].sample),
@@ -47,34 +49,38 @@ end
 																			 :end =>  [nil, (start_date.to_i + (1800..18000).to_a.sample).to_s].sample } )
 end
 
+$all_events = Event.all
+
 
 # Create attended_events, through attendees
-400.times do
+175.times do
 	user = random_user
 	event = random_event
 	user.attended_events << event unless event.organizer_id == user.id
 end
 
 # Create tags for events
-250.times do
+130.times do
 	random_event.tags << random_tag
 end
 
 # Create comments for events
-300.times do
+120.times do
 	random_event.comments << Comment.create(comment_attributes)
 end
 
+$all_comments = Comment.all
+
 # Create comments for comments ... three rounds
 3.times do
-	100.times do
+	40.times do
 		random_comment.replies.create(comment_attributes)
 	end
 end
 
 # Create votes for users
-User.all.each do |user|
-	40.times do
+$all_users.each do |user|
+	30.times do
 		vote = Vote.new( value: up_or_down, comment_id: random_comment.id )
 		if vote.valid?
 			vote.save
