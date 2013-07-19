@@ -1,8 +1,10 @@
-<div class="comments" id="comment_id<%= @comment.id %>">
-  <div>
-    <div><%= @comment.text %></div>
-    <div>Posted by: <%= @comment.author.twitter_handle %></div><br>
-  </div>
+<div class="comments" data-id="<%= @comment.id %>">
+
+  <div><%= @comment.upDownSum %></div>
+  <a class="up-vote" href="#">Up!</a>
+  <a class="down-vote" href="#">Down ;(</a><br>
+  <div><%= @comment.text %></div>
+  <div>Posted by: <%= @comment.author.twitter_handle %></div><br>
 
   <a class="reply" href="#">reply</a>
   <div class="reply" id="reply<%= @comment.id %>">
