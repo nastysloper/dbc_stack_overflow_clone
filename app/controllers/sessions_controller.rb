@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
   def auth
     @access_token = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
     session.delete(:request_token)
-    @user = User.find_by_oauth_token(params[:oauth_token])
+    @user = User.find_by_twitter_handle(@access_token.params[:screen_name])
 
     if @user
       @user.update_attributes(oauth_token: @access_token.token, oauth_secret: @access_token.secret)
