@@ -6,7 +6,9 @@
   <div><%= @comment.votes_sum %></div>
 
   <% if vote %>
-    <%= link_to "un-vote", vote_path(vote), method: :delete %>
+    <%= form_for vote, url: vote_path(vote), method: :delete do |f| %>
+      <%= f.submit 'un-vote' %>
+    <% end %>
   <% elsif current_user %>
     <%= form_for Vote.new(comment: @comment, value: 1) do |f|%>
       <%= f.hidden_field :comment_id %>
