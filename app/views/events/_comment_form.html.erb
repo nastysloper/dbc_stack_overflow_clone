@@ -1,4 +1,5 @@
-<%= form_for Comment.new do |f| %>
+<%= form_for Comment.new(parent: @comment) do |f| %>
+  <%= f.hidden_field :parent_id %>
   <%= f.text_field :text %>
   <%= f.submit %>
 <% end %>
