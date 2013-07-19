@@ -59,6 +59,10 @@ body.landing {
   text-decoration: none;
 }
 
+#sign_in_wrap p a:hover {
+  text-decoration: underline;
+}
+
 #sign_in_button {
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3689c4), to(#4dabe3)); 
   background: -webkit-linear-gradient(top, #4dabe3, #3689c4); 
