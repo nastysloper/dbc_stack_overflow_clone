@@ -19,9 +19,7 @@ describe CommentsController do
       end
 
       it 'saves a new comment' do
-        count = Comment.all.count
-        post :create, comment: @attrs
-        Comment.all.count.should eq count + 1
+        expect {post :create, comment: @attrs}.to change{Event.count}.by(1)
       end
     end
 
@@ -31,9 +29,7 @@ describe CommentsController do
       end
 
       it 'doesnt save' do
-        count = Comment.all.count
-        post :create, comment: @attrs
-        Comment.all.count.should eq count
+        expect {post :create, comment: @attrs}.not_to change{Event.count}
       end
     end
   end
