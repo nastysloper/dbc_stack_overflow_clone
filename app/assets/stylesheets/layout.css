@@ -7,12 +7,20 @@ header {
   background-color: #dddddd;
 }
 
+header a, header a:visited {
+  color: #333333;
+}
+
+header a:hover {
+  color: #4599cd;
+}
+
 #header_content {
   width: 800px;
   margin: 0 auto;
 }
 
 #container {
-  margin: 50px auto;
+  margin: 64px auto;
   width: 800px;
 }
