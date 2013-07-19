@@ -55,9 +55,7 @@ describe EventsController do
       end
 
       it 'saves a new event' do
-        count = Event.all.count
-        post :create, event: @attrs
-        Event.all.count.should eq count + 1
+        expect {post :create, event: @attrs}.to change{Event.count}.by(1)
       end
     end
 
@@ -67,9 +65,7 @@ describe EventsController do
       end
 
       it 'doesnt save' do
-        count = Event.all.count
-        post :create, event: @attrs
-        Event.all.count.should eq count
+        expect {post :create, event: @attrs}.not_to change{Event.count}
       end
     end
   end
