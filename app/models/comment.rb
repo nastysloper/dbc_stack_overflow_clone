@@ -11,11 +11,11 @@ class Comment < ActiveRecord::Base
   has_many :votes
   belongs_to :parent, :class_name => "Comment"
 
-  def upDownSum
+  def votes_sum
     votes.inject(0) {|acc, v| acc += v.value}
   end
 
-  def userVote(user) 
+  def vote_by(user) 
     Vote.where(comment_id: self.id, voter_id: user.id).first
   end
 
