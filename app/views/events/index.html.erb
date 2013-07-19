@@ -1,8 +1,8 @@
 <h1>What's Happening at DBC</h1>
 <ul>
 <% @events.each do |event| %>
-  <li><%= event.title %><br>
-  <%= event.start %>
+  <li><%= link_to event.title, event %><br>
+  <%= event.start.strftime("%A, %B %-d at %-l:%M%p") %>
   </li>
 <% end %>
 </ul>
