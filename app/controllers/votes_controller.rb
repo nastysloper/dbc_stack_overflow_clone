@@ -14,7 +14,7 @@ class VotesController < ApplicationController
 
   def update
     @vote.update_attributes(params[:vote])
-    redirect_to '/'
+    redirect_to session.delete(:return_to)
   end
 
   def destroy

@@ -6,6 +6,21 @@
   <div><%= @comment.votes_sum %></div>
 
   <% if vote %>
+    <% if vote.value > 0 %>
+      <% vote.value = -1 %>
+      <%= form_for vote do |f|%>
+        <%= f.hidden_field :comment_id %>
+        <%= f.hidden_field :value %>
+        <%= f.submit "Down :(" %>
+      <% end %>
+    <% elsif vote.value < 0 %>
+      <% vote.value = 1 %>
+      <%= form_for vote do |f|%>
+        <%= f.hidden_field :comment_id %>
+        <%= f.hidden_field :value %>
+        <%= f.submit "Up!" %>
+      <% end %>
+    <% end %>
     <%= form_for vote, url: vote_path(vote), method: :delete do |f| %>
       <%= f.submit 'un-vote' %>
     <% end %>
