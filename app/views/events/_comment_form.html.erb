@@ -1,4 +1,5 @@
-<%= form_for Comment.new do |f| %>
-  <%= f.text_field :text %>
-  <%= f.submit %>
+<%= form_for Comment.new(parent: @comment), html: {class: "hidden"} do |f| %>
+  <%= f.hidden_field :parent_id %>
+  <%= f.text_area :text, size: "50x4" %><br>
+  <%= f.submit "Reply" %>
 <% end %>
