@@ -1,0 +1,20 @@
+<div class="comments" id="comment_id<%= @comment.id %>">
+  <div>
+    <div><%= @comment.text %></div>
+    <div>Posted by: <%= @comment.author.twitter_handle %></div><br>
+  </div>
+
+  <a class="reply" href="#">reply</a>
+  <div class="reply" id="reply<%= @comment.id %>">
+    <%= render "comment_form" %>
+  </div>
+
+  <hr>
+
+  <div class="nested">
+    <% @comment.replies.each do |comment| %>
+      <% @comment = comment %>
+      <%= render "show_comment" %>
+    <% end %>
+  </div>
+</div>
