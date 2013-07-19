@@ -5,7 +5,6 @@
 Organizer ID: <%= @event.organizer_id %><br>
 
 <% @event.comments.each do |comment| %>
-  <% p comment %>
   <% @comment = comment %>
   <%= render "show_comment" %>
 <% end %>
