@@ -1,8 +1,19 @@
 <div class="comments" data-id="<%= @comment.id %>">
+  <% if current_user %>
+    <% vote = @comment.userVote(current_user) %>
+  <% end %>
 
-  <div><%= @comment.upDownSum %></div>
+  <div><%= @comment.upDownSum %>
+    <% if vote %>
+    voted!
+  </div>
+  <a class="un-vote" href="#" data-id="<%= vote.id %>">un-vote</a>
+    <% else %>
+  </div>
   <a class="up-vote" href="#">Up!</a>
   <a class="down-vote" href="#">Down ;(</a><br>
+    <% end %>
+
   <div><%= @comment.text %></div>
   <div>Posted by: <%= @comment.author.twitter_handle %></div><br>
 
