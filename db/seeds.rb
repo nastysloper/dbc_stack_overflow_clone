@@ -69,10 +69,10 @@ end
 	random_event.comments << Comment.create(comment_attributes)
 end
 
-$all_comments = Comment.all
 
 # Create comments for comments ... three rounds
 3.times do
+	$all_comments = Comment.all
 	40.times do
 		random_comment.replies.create(comment_attributes)
 	end
