@@ -26,6 +26,7 @@ body.landing {
 #sign_in_wrap h1 {
   padding: 0;
   margin: 0;
+  margin-bottom: 16px;
   text-align: center;
   color: #eeeeee;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -33,7 +34,7 @@ body.landing {
   text-shadow: 0 2px 6px black;
   }
 
-#sign_in_wrap p {
+#sign_in_wrap h3 {
   padding: 0;
   margin: 0;
   text-align: center;
@@ -41,7 +42,17 @@ body.landing {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-size: 1.5em;
   text-shadow: 0 2px 6px black;
-  }
+}
+
+#sign_in_wrap p {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  color: #eeeeee;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-size: 1em;
+  text-shadow: 0 2px 6px black;
+}
 
 #sign_in_wrap a, #sign_in_wrap a:visited, #sign_in_wrap a:hover {
   color: white;
@@ -55,7 +66,7 @@ body.landing {
   background: -ms-linear-gradient(top, #4dabe3, #3689c4); 
   background: -o-linear-gradient(top, #4dabe3, #3689c4);
   width: 300px;
-  margin: 32px auto 32px auto;
+  margin: 48px auto 32px auto;
   padding: 16px;
   outline: none;
   border: 1px solid #245C9F;
