@@ -64,3 +64,20 @@ table {
 body {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+a, a:visited, a:hover {
+  color: #4599CD;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #245C9F;
+}
