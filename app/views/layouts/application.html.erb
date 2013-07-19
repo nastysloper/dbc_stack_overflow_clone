@@ -8,7 +8,24 @@
 </head>
 <body>
 
-<%= yield %>
+<header>
+  <div id="header_content">
+    <div class="left">
+      <%= link_to "events", events_path %>
+    </div>
+    <div class="right">
+      <% if !session[:user_id] %>
+        <%= link_to "sign in with twitter", "/sign_in" %>
+      <% else %>
+        <%= link_to "sign out", "/sign_out" %>
+      <% end %>
+    </div>
+  </div>
+</header>
+
+<div id="container">
+  <%= yield %>
+</div>
 
 </body>
 </html>
