@@ -17,7 +17,7 @@ class EventsController < ApplicationController
 
   def create
     current_user.created_events << Event.new(params[:event])
-    redirect_to '/'
+    redirect_to events_path
   end
 
   def show
@@ -29,12 +29,12 @@ class EventsController < ApplicationController
 
   def update
     @event.update_attributes(params[:event])
-    redirect_to '/'
+    redirect_to event_path(@event)
   end
 
   def destroy
     @event.destroy
-    redirect_to '/'
+    redirect_to events_path
   end
   
 end
