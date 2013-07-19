@@ -4,20 +4,13 @@ describe VotesController do
   before(:all) do
     User.delete_all
     @user = User.create
-    # @vote = Vote.create(voter: @user, value: 1)
     @wrong_user = User.create
-  end
-
-  before(:each) do
-    Vote.delete_all
-    @vote = Vote.create(voter: @user, value: 1)
   end
 
   describe '#create' do
     context 'when user logged in' do
       before(:each) do
         session[:user_id] = @user.id
-        Vote.delete_all
       end
 
       it 'saves a new vote' do
@@ -38,6 +31,11 @@ describe VotesController do
   end
 
   describe '#update' do
+    before(:each) do
+      Vote.delete_all
+      @vote = Vote.create(voter: @user, value: 1)
+    end
+
     context 'when user logged in' do
       before(:each) do
         session[:user_id] = @user.id
@@ -66,6 +64,11 @@ describe VotesController do
   end
 
   describe '#destroy' do
+    before(:each) do
+      Vote.delete_all
+      @vote = Vote.create(voter: @user, value: 1)
+    end
+
     context 'when user logged in' do
       before(:each) do
         session[:user_id] = @user.id
