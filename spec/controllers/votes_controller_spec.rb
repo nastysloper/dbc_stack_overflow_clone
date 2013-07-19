@@ -19,9 +19,7 @@ describe VotesController do
       end
 
       it 'saves a new vote' do
-        count = Vote.all.count
-        post :create, value: @attrs
-        Vote.all.count.should eq count + 1
+        expect {post :create, value: @attrs}.to change{Vote.count}.by(1)
       end
     end
 
@@ -31,9 +29,7 @@ describe VotesController do
       end
 
       it 'doesnt save' do
-        count = Vote.all.count
-        post :create, value: @attrs
-        Vote.all.count.should eq count
+        expect {post :create, value: @attrs}.not_to change{Vote.count}
       end
     end
   end

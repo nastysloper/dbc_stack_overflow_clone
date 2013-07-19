@@ -13,7 +13,6 @@ class VotesController < ApplicationController
   end
 
   def update
-    p params
     @vote.update_attributes(params[:vote])
     redirect_to '/'
   end
