@@ -33,6 +33,7 @@ var Handlers = {
     }
   }
 }
+
 var Helpers = {
   post: {
     vote: function(commentId, value) {
