@@ -9,13 +9,18 @@ class CommentsController < ApplicationController
 
   def create
     new_comment = Comment.new(params[:comment])
+
+    if new_comment.parent_id != nil
+      new_comment.event_id = nil
+    end
+
     current_user.comments << new_comment
     redirect_to event_path(params[:comment][:event_id])
   end
 
   def update
     @comment.update_attributes(params[:comment])
-    redirect_to '/'
+    redirect_to 
   end
 
   def destroy
