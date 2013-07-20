@@ -1,0 +1,26 @@
+header {
+  position: fixed;
+  height: 30px;
+  width: 100%;
+  line-height: 30px;
+  top: 0;
+  background-color: #dddddd;
+}
+
+header a, header a:visited {
+  color: #333333;
+}
+
+header a:hover {
+  color: #4599cd;
+}
+
+#header_content {
+  width: 800px;
+  margin: 0 auto;
+}
+
+#container {
+  margin: 64px auto;
+  width: 800px;
+}

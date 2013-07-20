@@ -21,9 +21,10 @@ class SessionsController < ApplicationController
       @user = User.create(oauth_token: @access_token.token, oauth_secret: @access_token.secret, twitter_handle: @access_token.params[:screen_name])
     end
 
+    Rails.logger.debug(@user.inspect)
     session[:user_id] = @user.id
 
-    redirect_to '/'
+    redirect_to events_path
   end
 
   private

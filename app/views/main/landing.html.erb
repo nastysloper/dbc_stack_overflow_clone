@@ -1,17 +1,10 @@
-<h1>Welcome to Our App!</h1>
+<div id=sign_in_wrap>
 
-<% if @user %>
-    <div>
-      <form action="/" method="post">
-        <label for="tweet">Tweet: </label>
-        <input name="tweet" type="text">
-        <input type="submit" value="Submit" id="submit">
-        <img src="/images/ajax-loader.gif" id="wait">
-      </form>
-      <p>
-        <button><a href="/sign_out">Sign Out</a></button>
-      </p>
-    </div>
-<% else %>
-    <button><a href="/sign_in">Sign In with Twitter</a></button>
-<% end %>
+  <h1>Event Crafting</h1>
+  <h3>plan collaboratively with your guests</h3>
+
+  <a href="/sign_in"><div id="sign_in_button">Sign In with Twitter</div></a>
+
+  <p><%= link_to "Or browse events ...", events_path %></p>
+
+</div>

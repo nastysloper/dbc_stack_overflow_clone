@@ -8,7 +8,8 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = Event.all
+    #@events = Event.all
+    @events = Event.order("start").limit(20)
   end
 
   def new
