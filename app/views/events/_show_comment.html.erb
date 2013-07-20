@@ -2,39 +2,56 @@
   <% if current_user %>
     <% vote = @comment.vote_by(current_user) %>
   <% end %>
-  
-  <div><%= @comment.votes_sum %></div>
 
   <% if vote %>
+
     <% if vote.value > 0 %>
       <% vote.value = -1 %>
+      
+      <%= form_for vote, url: vote_path(vote), method: :delete do |f| %>
+        <%= f.submit 'Up!', class: "upvoted button"%>
+      <% end %>
+
+      <div><%= @comment.votes_sum %></div>
+
       <%= form_for vote do |f|%>
         <%= f.hidden_field :comment_id %>
         <%= f.hidden_field :value %>
-        <%= f.submit "Down :(" %>
+        <%= f.submit "Down!", class: "downvote button" %>
       <% end %>
+
     <% elsif vote.value < 0 %>
+      
       <% vote.value = 1 %>
       <%= form_for vote do |f|%>
         <%= f.hidden_field :comment_id %>
         <%= f.hidden_field :value %>
-        <%= f.submit "Up!" %>
+        <%= f.submit "Up!", class: 'upvote button' %>
+      <% end %>
+
+      <div><%= @comment.votes_sum %></div>
+      
+      <%= form_for vote, url: vote_path(vote), method: :delete do |f| %>
+      <%= f.submit 'Down!', class: 'downvoted button' %>
       <% end %>
     <% end %>
-    <%= form_for vote, url: vote_path(vote), method: :delete do |f| %>
-      <%= f.submit 'un-vote' %>
-    <% end %>
+
   <% elsif current_user %>
+
     <%= form_for Vote.new(comment: @comment, value: 1) do |f|%>
       <%= f.hidden_field :comment_id %>
       <%= f.hidden_field :value %>
-      <%= f.submit "Up!" %>
+      <%= f.submit "Up!", class: 'upvote button'%>
     <% end %>
+
+    <div><%= @comment.votes_sum %></div>
+
     <%= form_for Vote.new(comment: @comment, value: -1) do |f|%>
       <%= f.hidden_field :comment_id %>
       <%= f.hidden_field :value %>
-      <%= f.submit "Down :(" %>
+      <%= f.submit "Down!", class: 'downvote button' %>
     <% end %>
+
   <% end %>
 
   <div><%= @comment.text %></div>

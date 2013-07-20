@@ -5,3 +5,15 @@
 .hidden {
   display: none;
 }
+
+.button {
+  background-color: #ddd;
+}
+
+.downvoted {
+  background-color: lightblue;
+}
+
+.upvoted {
+  background-color: orange;
+}

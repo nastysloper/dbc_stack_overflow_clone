@@ -9,17 +9,17 @@ class VotesController < ApplicationController
 
   def create
     current_user.votes << Vote.new(params[:vote])
-    redirect_to session.delete(:return_to)
+    redirect_to (session[:return_to] || '/')
   end
 
   def update
     @vote.update_attributes(params[:vote])
-    redirect_to session.delete(:return_to)
+    redirect_to (session[:return_to] || '/')
   end
 
   def destroy
     @vote.destroy
-    redirect_to session.delete(:return_to)
+    redirect_to (session[:return_to] || '/')
   end
 
 end
