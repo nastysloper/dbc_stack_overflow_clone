@@ -3,7 +3,9 @@
     <% @vote = @comment.vote_by(current_user) %>
   <% end %>
 
-  <%= render "votes_forms" %>
+  <div class="votes-forms">
+    <%= render "votes_forms" %>
+  </div>
 
   <div><%= @comment.text %></div>
   <div>Posted by: <%= @comment.author.twitter_handle %></div><br>

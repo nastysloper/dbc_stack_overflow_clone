@@ -4,7 +4,7 @@
       <% @vote.value = -1 %>
       
       <%= form_for @vote, url: vote_path(@vote), method: :delete do |f| %>
-        <%= button_tag( :class => "upvoted button") do %><i class="icon-arrow-up"></i>
+        <%= button_tag( :class => "upvoted unvote button") do %><i class="icon-arrow-up"></i>
         <% end %>
       <% end %>
 
@@ -31,7 +31,7 @@
       <div><%= @comment.votes_sum %></div>
       
       <%= form_for @vote, url: vote_path(@vote), method: :delete do |f| %>
-        <%= button_tag( :class => "downvoted button") do %><i class="icon-arrow-down"></i>
+        <%= button_tag( :class => "downvoted unvote button") do %><i class="icon-arrow-down"></i>
           <% end %>
       <% end %>
     <% end %>

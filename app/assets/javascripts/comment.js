@@ -1,4 +1,30 @@
 var Handlers = {
+  submit: {
+    upVote: function(e) {
+      console.log('submit upVote');
+      e.preventDefault();
+      $.post(e.currentTarget.action, $(e.currentTarget).serialize(), Handlers.response.changeVote);
+    },
+    downVote: function(e) {
+      console.log('submit downVote');
+      e.preventDefault();
+      $.post(e.currentTarget.action, $(e.currentTarget).serialize(), Handlers.response.changeVote);
+    },
+    unVote: function(e) {
+      console.log('submit unVote');
+      e.preventDefault();
+      $.ajax(e.currentTarget.action, {"method": "DELETE", "success": Handlers.response.changeVote});
+    }
+  },
+  response: {
+    changeVote: function(data) {
+      console.log('response changeVote');
+      $data = $(data);
+      var commentId = $data.find('input#vote_comment_id').attr('value');
+      $('div.comments[data-id="' + commentId + '"]').find('div.votes-forms').first().html(data);
+      onReady();
+    }
+  },
   click: {
     a: {
       reply: function(e) {
@@ -12,48 +38,16 @@ var Handlers = {
           $this.text('cancel')
         }
       }
-      // ,
-      // upVote: function(e) {
-      //   console.log('click a upVote');
-      //   e.preventDefault();
-      //   var commentId = $(this).parent().data('id');
-      //   Helpers.post.vote(commentId, 1);
-      // },
-      // downVote: function(e) {
-      //   console.log('click a downVote');
-      //   e.preventDefault();
-      //   var commentId = $(this).parent().data('id');
-      //   Helpers.post.vote(commentId, -1);
-      // },
-      // unVote: function(e) {
-      //   console.log('click a unVote');
-      //   e.preventDefault();
-      //   var id = $(this).data('id');
-      //   Helpers.delete.vote(id);
-      // }
     }
   }
 }
 
-var Helpers = {
-  post: {
-    vote: function(commentId, value) {
-      $.post('/votes', {"vote": {"comment_id": commentId, "value": value}})
-    }
-  }
-  // ,
-  // delete: {
-  //   vote: function(id) {
-  //     $.ajax('/votes/' + id, {"type": "DELETE"});
-  //   }
-  // }
-}
 var onReady = function onReady() {
   console.log('onReady');
   $('a.reply').on('click', Handlers.click.a.reply);
-  // $('a.up-vote').on('click', Handlers.click.a.upVote);
-  // $('a.down-vote').on('click', Handlers.click.a.downVote);
-  // $('a.un-vote').on('click', Handlers.click.a.unVote);
+  $('button.upvote').parent().on('submit', Handlers.submit.upVote);
+  $('button.downvote').parent().on('submit', Handlers.submit.downVote);
+  $('button.unvote').parent().on('submit', Handlers.submit.unVote);
 };
 
 $(document).ready(onReady);
