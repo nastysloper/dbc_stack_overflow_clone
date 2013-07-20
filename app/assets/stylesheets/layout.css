@@ -1,5 +1,5 @@
 header {
-  position: absolute;
+  position: fixed;
   height: 30px;
   width: 100%;
   line-height: 30px;
