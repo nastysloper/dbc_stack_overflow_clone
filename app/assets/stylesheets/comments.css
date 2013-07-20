@@ -5,3 +5,12 @@
 .hidden {
   display: none;
 }
+
+.event_comment {
+  margin: 32px 0 32px 0;
+}
+
+.event_comment textarea{
+  width: 100%;
+  resize: none;
+}

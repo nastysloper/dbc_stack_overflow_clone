@@ -8,8 +8,9 @@ class CommentsController < ApplicationController
   end
 
   def create
-    current_user.comments << Comment.new(params[:comment])
-    redirect_to '/'
+    new_comment = Comment.new(params[:comment])
+    current_user.comments << new_comment
+    redirect_to event_path(params[:comment][:event_id])
   end
 
   def update
