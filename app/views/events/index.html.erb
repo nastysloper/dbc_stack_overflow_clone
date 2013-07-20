@@ -6,7 +6,7 @@
 
     <div class="event_wrapper">
       <%= link_to event.title, event %><br>
-      <%= event.start.strftime("%A, %B %-d at %-l:%M%p") %>
+      <p class="event_date left"><%= event.start.strftime("%A, %B %-d at %-l:%M%p") %> by <%= link_to "@#{event.organizer.twitter_handle}", "http://twitter.com/#{event.organizer.twitter_handle}" %></p>
     </div>
     
   <% end %>
