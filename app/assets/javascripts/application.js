@@ -12,4 +12,5 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= comment_on_comment
 //= require_tree .

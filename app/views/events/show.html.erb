@@ -6,6 +6,12 @@
     <h3>Event Description</h3>
     <p><%= @event.description %></p>
 
+    <ul>
+      <% @event.tags.each do |tag| %>
+        <li><%= tag.name %></li>
+      <% end %>
+    </ul>
+
     <br><br>
 
     <h3>Event Details</h3>
@@ -33,8 +39,6 @@
     <% end %>
 
   </div>
-
-
 
   <% @event.comments.each do |comment| %>
     <div class="event_wrapper">
