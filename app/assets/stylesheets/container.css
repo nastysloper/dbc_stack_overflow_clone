@@ -1,0 +1,57 @@
+#container h1 {
+  font-size: 2em;
+  margin-bottom: 32px;
+}
+
+#events_wrapper {
+  padding: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 534px;
+  border: 1px solid #cccccc;
+  color: #666666;
+}
+
+#events_wrapper h3 {
+  font-size: 1.4em;
+  margin-bottom: 8px;
+  color: #333333;
+}
+
+.event_wrapper {
+  padding: 16px 16px 24px 16px;
+  border-bottom: 1px solid #cccccc;
+  overflow: hidden;
+}
+
+.event_info {
+  padding: 16px 16px 24px 16px;
+  overflow: hidden;
+}
+
+#events_wrapper > div.event_wrapper:last-of-type {
+  border-bottom: none;
+}
+
+.event_date {
+  margin-top: 8px;
+  font-size: .8em;
+  color: #666666;
+}
+
+.event_date a, .event_date a:visited, .event_date a:hover {
+  color: #666666;
+}
+
+.event_date a:hover {
+  color: #4599cd;
+}
+
+.event_author {
+  font-size: .8em;
+  color: #666666;
+}
+
+.event_details p {
+  margin-bottom: 0px;
+}
