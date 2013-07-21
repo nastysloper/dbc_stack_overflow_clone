@@ -11,16 +11,26 @@
 
 <header>
   <div id="header_content">
+    <div class="left pad-right">
+      <%= link_to "view events", events_path %>
+    </div>
     <div class="left">
-      <%= link_to "events", events_path %>
+      <%= link_to "create event", new_event_path %>
     </div>
-    <div class="right">
-      <% if !session[:user_id] %>
-        <%= link_to "sign in with twitter", "/sign_in" %>
+
+    
+      <% if session[:user_id] %>
+        <div class="right">
+          <%= link_to "sign out", "/sign_out" %>
+        </div>
+        <div class="right pad-right">
+          @<%= current_user.twitter_handle %>
+        </div>
       <% else %>
-        <%= link_to "sign out", "/sign_out" %>
+        <div class="right">
+          <%= link_to "sign in with twitter", "/sign_in" %>
+        </div>
       <% end %>
-    </div>
   </div>
 </header>
 

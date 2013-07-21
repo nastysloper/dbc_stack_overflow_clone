@@ -1,0 +1,31 @@
+<% if current_user.id == @event.organizer.id %>
+  <h3>This is Your Event</h3>
+  <p class="sidebar_list"><%= link_to "edit event", edit_event_path(@event) %></p>
+  <p><%= link_to("delete event", event_path(@event), method: :delete) %></p>
+<% else %>
+  <h3>Your Plans</h3>
+  
+  <% if current_user.attended_events.include?(@event) %>
+    <p>You're attending this event</p>
+  <% else %>
+    <p>Let @<%= @event.organizer.twitter_handle %> know that you'll be there.</p>
+    <br>
+    <div class="button center">rsvp</div>
+  <% end %>
+
+
+<% end %>
+
+
+<br><br><br>
+
+
+<h3>Who's Attending</h3>
+
+<% if @event.participants.any? %>
+  <% @event.participants.each do |participant| %>
+    <p><%= link_to "@#{participant.twitter_handle}", "http://twitter.com/#{participant.twitter_handle}" %></p>
+  <% end %>
+<% else %>
+  <p>No one has signed up to attend this event.</p>
+<% end %>

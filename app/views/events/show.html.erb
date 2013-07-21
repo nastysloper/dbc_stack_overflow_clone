@@ -1,5 +1,13 @@
 <h1><%= @event.title %></h1>
 
+<div id="sidebar">
+  <% if current_user %>
+    <%= render "sidebars/events_show" %>
+  <% else %>
+    <%= render "sidebars/no_current_user" %>
+  <% end %>
+</div>
+
 <div id="events_wrapper">
 
   <div class="event_info">
