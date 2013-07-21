@@ -4,20 +4,20 @@
   <% end %>
 
   <div class="votes-forms">
-    <%= render "votes_forms" %>
+    <%= render "events/votes_forms" %>
   </div>
 
   <div><%= @comment.text %></div>
   <div>Posted by: <%= @comment.author.twitter_handle %></div><br>
 
   <a class="reply" href="#">reply</a>
-  <%= render "comment_form" %>
+  <%= render "events/comment_form" %>
 
 
   <div class="nested">
     <% @comment.replies.each do |comment| %>
       <% @comment = comment %>
-      <%= render "show_comment" %>
+      <%= render "events/show_comment" %>
     <% end %>
   </div>
 </div>

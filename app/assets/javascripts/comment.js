@@ -1,5 +1,11 @@
 var Handlers = {
   submit: {
+    reply: function(e) {
+      console.log('submit reply');
+      e.preventDefault();
+      parentId = $(this).parent().data('id')
+      $.post(e.currentTarget.action, $(this).serialize(), Handlers.response.reply);
+    },
     upVote: function(e) {
       console.log('submit upVote');
       e.preventDefault();
@@ -23,6 +29,12 @@ var Handlers = {
       var commentId = $data.find('input#vote_comment_id').attr('value');
       $('div.comments[data-id="' + commentId + '"]').find('div.votes-forms').first().html(data);
       onReady();
+    },
+    reply: function(data) {
+      console.log('response reply');
+      var parentId = $(data).data('id');
+      $('div.comments[data-id="' + parentId + '"]').replaceWith(data);
+      onReady();
     }
   },
   click: {
@@ -45,6 +57,7 @@ var Handlers = {
 var onReady = function onReady() {
   console.log('onReady');
   $('a.reply').on('click', Handlers.click.a.reply);
+  $('form.reply').on('submit', Handlers.submit.reply);
   $('button.upvote').parent().on('submit', Handlers.submit.upVote);
   $('button.downvote').parent().on('submit', Handlers.submit.downVote);
   $('button.unvote').parent().on('submit', Handlers.submit.unVote);
