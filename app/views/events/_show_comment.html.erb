@@ -3,40 +3,50 @@
     <% vote = @comment.vote_by(current_user) %>
   <% end %>
 
-  <p class="comment_author">@<%= @comment.author.twitter_handle %> wrote:</p>
-  <div><%= @comment.text %></div>
-
-
+  <p class="light_gray_text comment_author small">@<%= @comment.author.twitter_handle %> wrote:</p>
   
-  <div><%= @comment.votes_sum %></div>
+  <p><%= @comment.text %></p>
+  <br>
+  <p class="light_gray_text small">
+    This comment has <%= @comment.votes.where("value = 1").count %> <%= @comment.votes.where("value = 1").count == 1 ? "supporter" : "supporters" %> and <%= @comment.votes.where("value = -1").count %> <%= @comment.votes.where("value = -1").count == 1 ? "hater" : "haters" %>.
+  </p>
 
-  <div class="comment_voting">
-    <% if vote %>
-      <%= link_to "withdraw your vote", vote_path(vote), method: :delete %>
-    <% elsif current_user %>
-      <%= form_for Vote.new(comment: @comment, value: 1) do |f|%>
-        <%= f.hidden_field :comment_id %>
-        <%= f.hidden_field :value %>
-        <%= f.submit "support this comment", class: "button" %>
+    <div class="comment_voting">
+      <% if vote %>
+        <p class="small light_gray_text">
+          <%= vote.value == 1 ? "You support this comment." : "You're hating on this comment." %>
+          <br>
+          <%= link_to "withdraw your vote", vote_path(vote), method: :delete %>
+        </p>
+      <% elsif current_user %>
+        <div class="vote_forms_wrap">
+          <%= form_for Vote.new(comment: @comment, value: 1) do |f|%>
+            <%= f.hidden_field :comment_id %>
+            <%= f.hidden_field :value %>
+            <%= f.submit "support", class: "vote_button" %>
+          <% end %>
+          <%= form_for Vote.new(comment: @comment, value: -1) do |f|%>
+            <%= f.hidden_field :comment_id %>
+            <%= f.hidden_field :value %>
+            <%= f.submit "dislike", class: "vote_button" %>
+          <% end %>
+        </div>
       <% end %>
-      <%= form_for Vote.new(comment: @comment, value: -1) do |f|%>
-        <%= f.hidden_field :comment_id %>
-        <%= f.hidden_field :value %>
-        <%= f.submit "dislike this comment", class: "button" %>
-      <% end %>
-    <% end %>
+      <br>
 
-    <a class="reply" href="#">reply</a>
-    <div class="reply" id="reply<%= @comment.id %>">
-      <%= render "comment_form" %>
+      <% if current_user %>
+      <a class="reply small" href="#">reply to this comment</a>
+      <div class="reply" id="reply<%= @comment.id %>">
+        <%= render "comment_form" %>
+      </div>
+      <% end %>
+
+
+      <div class="nested">
+        <% @comment.replies.each do |comment| %>
+          <% @comment = comment %>
+          <%= render "show_comment" %>
+        <% end %>
+      </div>
     </div>
-
-
-    <div class="nested">
-      <% @comment.replies.each do |comment| %>
-        <% @comment = comment %>
-        <%= render "show_comment" %>
-      <% end %>
-    </div>
-  </div>
 </div>

@@ -106,6 +106,7 @@ textarea {
   border-radius: 4px;
   color: white;
   padding: 4px 8px;
+  min-width: 150px;
 }
 
 .button:hover {
@@ -119,4 +120,16 @@ textarea {
 
 input:focus, textarea:focus {
   border: 1px solid #4599cD;
+}
+
+.light_gray_text {
+  color: #999999;
+}
+
+.center {
+  text-align: center;
+}
+
+.small {
+  font-size: .8em;
 }
