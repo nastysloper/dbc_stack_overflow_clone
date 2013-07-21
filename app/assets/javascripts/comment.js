@@ -35,6 +35,10 @@ var Handlers = {
       var parentId = $(data).data('id');
       $('div.comments[data-id="' + parentId + '"]').replaceWith(data);
       onReady();
+    },
+    delete: function(data) {
+      console.log('response delete');
+      $('div.comments[data-id="' + data + '"]').remove();
     }
   },
   click: {
@@ -49,6 +53,11 @@ var Handlers = {
         } else {
           $this.text('cancel')
         }
+      },
+      delete: function(e) {
+        console.log('click a delete');
+        $.ajax(e.currentTarget.href, {"method": "DELETE", "success": Handlers.response.delete});
+        return false;
       }
     }
   }
@@ -57,6 +66,7 @@ var Handlers = {
 var onReady = function onReady() {
   console.log('onReady');
   $('a.reply').on('click', Handlers.click.a.reply);
+  $('a.delete').on('click', Handlers.click.a.delete);
   $('form.reply').on('submit', Handlers.submit.reply);
   $('button.upvote').parent().on('submit', Handlers.submit.upVote);
   $('button.downvote').parent().on('submit', Handlers.submit.downVote);

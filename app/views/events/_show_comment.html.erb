@@ -11,6 +11,10 @@
   <div>Posted by: <%= @comment.author.twitter_handle %></div><br>
 
   <a class="reply" href="#">reply</a>
+  <% if current_user.comments.find_by_id(@comment.id) %>
+  <a class="edit" href="#">edit</a>
+  <%= link_to("delete", comment_path(@comment), method: :delete, class: "delete") %>
+  <% end %>
   <%= render "events/comment_form" %>
 
 
