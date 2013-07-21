@@ -1,0 +1,26 @@
+#sidebar {
+  float: right;
+  width: 206px;
+  padding: 8px;
+  margin-left: 40px;
+  min-height: 200px;
+  border: 1px solid #cccccc;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dddddd), to(#eeeeee)); 
+  background: -webkit-linear-gradient(top, #eeeeee, #dddddd); 
+  background: -moz-linear-gradient(top, #eeeeee, #dddddd); 
+  background: -ms-linear-gradient(top, #eeeeee, #dddddd); 
+  background: -o-linear-gradient(top, #eeeeee, #dddddd);
+  border-radius: 8px;
+  color: #777777;
+  font-size: .8em;
+}
+
+#sidebar h3 {
+  font-size: 1.4em;
+  margin-bottom: 8px;
+  color: #666666;
+}
+
+#sidebar p {
+  margin-bottom: 4px;
+}

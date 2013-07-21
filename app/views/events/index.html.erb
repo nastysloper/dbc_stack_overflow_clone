@@ -1,5 +1,13 @@
 <h1>Upcoming Events</h1>
 
+<div id="sidebar">
+  <% if current_user %>
+    <%= render "sidebars/events_index" %>
+  <% else %>
+    <%= render "sidebars/no_current_user" %>
+  <% end %>
+</div>
+
 <div id="events_wrapper">
 
   <% @events.each do |event| %>

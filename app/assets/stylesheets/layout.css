@@ -16,6 +16,10 @@ header a:hover {
   color: #4599cd;
 }
 
+.pad-right {
+  margin-right: 40px;
+}
+
 #header_content {
   width: 800px;
   margin: 0 auto;
