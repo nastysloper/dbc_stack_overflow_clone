@@ -7,7 +7,12 @@
     <%= render "events/votes_forms" %>
   </div>
 
-  <div><%= @comment.text %></div>
+  <div class="text"><%= @comment.text %></div>
+  <%= form_for @comment, html: {class: "edit text hidden"} do |f| %>
+    <%= f.hidden_field :parent_id %>
+    <%= f.text_area :text, size: "50x4" %><br>
+    <%= f.submit "Edit" %>
+  <% end %>
   <div>Posted by: <%= @comment.author.twitter_handle %></div><br>
 
   <a class="reply" href="#">reply</a>

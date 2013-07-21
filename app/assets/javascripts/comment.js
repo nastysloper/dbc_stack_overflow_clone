@@ -54,6 +54,18 @@ var Handlers = {
           $this.text('cancel')
         }
       },
+      edit: function(e) {
+        console.log('click a edit');
+        e.preventDefault();
+        $this = $(this)
+        $this.siblings('div.text').toggle('hidden');
+        $this.siblings('form.edit').toggle('hidden');
+        if ($this.text() == 'cancel') {
+          $this.text('edit');
+        } else {
+          $this.text('cancel')
+        }
+      },
       delete: function(e) {
         console.log('click a delete');
         $.ajax(e.currentTarget.href, {"method": "DELETE", "success": Handlers.response.delete});
@@ -67,6 +79,7 @@ var onReady = function onReady() {
   console.log('onReady');
   $('a.reply').on('click', Handlers.click.a.reply);
   $('a.delete').on('click', Handlers.click.a.delete);
+  $('a.edit').on('click', Handlers.click.a.edit);
   $('form.reply').on('submit', Handlers.submit.reply);
   $('button.upvote').parent().on('submit', Handlers.submit.upVote);
   $('button.downvote').parent().on('submit', Handlers.submit.downVote);
