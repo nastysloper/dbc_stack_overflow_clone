@@ -20,6 +20,7 @@ class CommentsController < ApplicationController
 
   def update
     @comment.update_attributes(params[:comment])
+
     if request.xhr?
       render partial: "events/show_comment"
     else

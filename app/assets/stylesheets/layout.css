@@ -5,6 +5,7 @@ header {
   line-height: 30px;
   top: 0;
   background-color: #dddddd;
+  box-shadow: 0px 0px 50px 0 #ffffff;
 }
 
 header a, header a:visited {
@@ -23,4 +24,9 @@ header a:hover {
 #container {
   margin: 64px auto;
   width: 800px;
+}
+
+#container h1 {
+  font-size: 2em;
+  margin-bottom: 32px;
 }
