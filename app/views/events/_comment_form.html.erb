@@ -1,4 +1,4 @@
-<%= form_for Comment.new(parent: @comment, event: @event), html: {class: "hidden"}, class: "vote_button" do |f| %>
+<%= form_for Comment.new(parent: @comment), html: {class: "reply hidden"} do |f| %>
   <%= f.hidden_field :parent_id %>
 
   <%= f.hidden_field :event_id %>

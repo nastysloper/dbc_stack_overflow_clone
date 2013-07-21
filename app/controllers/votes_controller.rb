@@ -8,18 +8,35 @@ class VotesController < ApplicationController
   end
 
   def create
-    current_user.votes << Vote.new(params[:vote])
-    redirect_to session.delete(:return_to)
+    @vote = Vote.new(params[:vote])
+    current_user.votes << @vote
+    if request.xhr?
+      @comment = @vote.comment
+      render partial: "events/votes_forms"
+    else
+      redirect_to (session[:return_to] || '/')
+    end
   end
 
   def update
     @vote.update_attributes(params[:vote])
-    redirect_to '/'
+    if request.xhr?
+      @comment = @vote.comment
+      render partial: "events/votes_forms"
+    else
+      redirect_to (session[:return_to] || '/')
+    end
   end
 
   def destroy
+    @comment = @vote.comment
     @vote.destroy
-    redirect_to session.delete(:return_to)
+    @vote = nil
+    if request.xhr?
+      render partial: "events/votes_forms"
+    else
+      redirect_to (session[:return_to] || '/')
+    end
   end
 
 end

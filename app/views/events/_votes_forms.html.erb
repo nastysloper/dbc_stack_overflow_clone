@@ -1,0 +1,59 @@
+<% if @vote %>
+
+    <% if @vote.value > 0 %>
+      <% @vote.value = -1 %>
+      
+      <%= form_for @vote, url: vote_path(@vote), method: :delete do |f| %>
+        <%= button_tag( :class => "upvoted unvote button") do %><i class="icon-arrow-up"></i>
+        <% end %>
+      <% end %>
+
+      <div><%= @comment.votes_sum %></div>
+
+      <%= form_for @vote do |f|%>
+        <%= f.hidden_field :comment_id %>
+        <%= f.hidden_field :value %>
+        <%= button_tag( :class => "downvote button") do %><i class="icon-arrow-down"></i>
+        <% end %>
+      <% end %>
+
+    <% elsif @vote.value < 0 %>
+      
+      <% @vote.value = 1 %>
+      <%= form_for @vote do |f|%>
+        <%= f.hidden_field :comment_id %>
+        <%= f.hidden_field :value %>
+
+        <%= button_tag( :class => "upvote button") do %><i class="icon-arrow-up"></i>
+        <% end %>
+      <% end %>
+
+      <div><%= @comment.votes_sum %></div>
+      
+      <%= form_for @vote, url: vote_path(@vote), method: :delete do |f| %>
+        <%= button_tag( :class => "downvoted unvote button") do %><i class="icon-arrow-down"></i>
+          <% end %>
+      <% end %>
+    <% end %>
+
+  <% elsif current_user %>
+
+    <%= form_for Vote.new(comment: @comment, value: 1) do |f|%>
+      <%= f.hidden_field :comment_id %>
+      <%= f.hidden_field :value %>
+      <%= button_tag( :class => "upvote button") do %><i class="icon-arrow-up"></i>
+        <% end %>
+    <% end %>
+
+    <div><%= @comment.votes_sum %></div>
+
+    <%= form_for Vote.new(comment: @comment, value: -1) do |f|%>
+      <%= f.hidden_field :comment_id %>
+      <%= f.hidden_field :value %>
+      <%= button_tag( :class => "downvote button") do %><i class="icon-arrow-down"></i>
+        <% end %>
+    <% end %>
+
+  <% else %>
+    <%= link_to 'Sign in to vote!', '/sign_in' %>
+  <% end %>

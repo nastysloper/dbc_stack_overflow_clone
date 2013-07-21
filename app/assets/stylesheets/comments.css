@@ -60,3 +60,15 @@
   width: 98%;
   height: 56px;
 }
+
+.button {
+  background-color: #ddd;
+}
+
+.downvoted {
+  background-color: lightblue;
+}
+
+.upvoted {
+  background-color: orange;
+}
