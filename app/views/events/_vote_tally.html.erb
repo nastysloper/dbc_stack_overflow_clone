@@ -1,0 +1,8 @@
+<% if @comment.votes.any? %>
+    This comment has <%= @comment.votes.where("value = 1").count %>
+    <%= @comment.votes.where("value = 1").count == 1 ? "upvote" : "upvotes" %> and
+    <%= @comment.votes.where("value = -1").count %>
+    <%= @comment.votes.where("value = -1").count == 1 ? "downvote" : "downvotes" %>.
+<% else %>
+  No votes have been cast for this comment.
+<% end %>

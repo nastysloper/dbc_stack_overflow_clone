@@ -1,9 +1,64 @@
 .nested {
-  padding-left: 2em;
+  padding-left: 3em;
+  padding-top: 1em;
+  margin-top: 1em;
 }
 
 .hidden {
   display: none;
+}
+
+.event_comment {
+  margin: 32px 0 32px 0;
+}
+
+.event_comment textarea{
+  width: 100%;
+  resize: none;
+}
+
+.comment_author {
+  color: #999999;
+  margin-top: 24px;
+}
+
+.vote_forms_wrap {
+  overflow: hidden;
+}
+
+.comment_voting {
+  overflow: hidden;
+}
+
+.vote_button {
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dddddd), to(#ffffff)); 
+  background: -webkit-linear-gradient(top, #ffffff, #dddddd); 
+  background: -moz-linear-gradient(top, #ffffff, #dddddd); 
+  background: -ms-linear-gradient(top, #ffffff, #dddddd); 
+  background: -o-linear-gradient(top, #ffffff, #dddddd);
+  outline: none;
+  border: 1px solid #bbbbbb;
+  border-radius: 4px;
+  color: #666666;
+  padding: 4px 8px;
+  min-width: 70px;
+  float: left;
+  margin: 8px 8px 4px 0;
+  font-size: 10px;
+}
+
+.vote_button:hover {
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#bbbbbb), to(#dddddd)); 
+  background: -webkit-linear-gradient(top, #dddddd, #bbbbbb); 
+  background: -moz-linear-gradient(top, #dddddd, #bbbbbb); 
+  background: -ms-linear-gradient(top, #dddddd, #bbbbbb); 
+  background: -o-linear-gradient(top, #dddddd, #bbbbbb);
+  cursor: pointer;
+}
+
+.comment_textarea {
+  width: 98%;
+  height: 56px;
 }
 
 .button {

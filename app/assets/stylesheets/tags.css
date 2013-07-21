@@ -1,0 +1,11 @@
+div.event_info ul {
+  margin: 16px auto 0 auto;
+  text-align: center;
+  font-size: .8em;
+  color: #999999;
+}
+
+div.event_info ul li {
+  display: inline;
+  padding: 0 8px 0 8px;
+}
