@@ -1,27 +1,43 @@
 <div class="comments" data-id="<%= @comment.id %>">
-  <% if current_user %>
-    <% @vote = @comment.vote_by(current_user) %>
+  
+  <p class="light_gray_text comment_author small">
+    <% if @comment.author == current_user %>
+      You wrote:
+    <% else %>
+      <%= link_to "@#{@comment.author.twitter_handle}", "http://twitter.com/#{@comment.author.twitter_handle}" %> wrote:
+    <% end %>
+  </p>
+
+  <p><%= @comment.text %></p>
+  <br>
+
+  <% if current_user.comments.find_by_id(@comment.id) %>
+    <p class="light_gray_text small">
+      <a class="edit" href="#">edit</a>
+      <%= link_to("delete", comment_path(@comment), method: :delete, class: "delete") %>
+    </p>
   <% end %>
+
+  <br>
+
+  <p class="light_gray_text small" id="vote_tally">
+    <%= render "vote_tally" %>
+  </p>
 
   <div class="votes-forms">
     <%= render "events/votes_forms" %>
   </div>
 
-  <div class="text"><%= @comment.text %></div>
   <%= form_for @comment, html: {class: "edit text hidden"} do |f| %>
     <%= f.hidden_field :parent_id %>
     <%= f.text_area :text, size: "50x4" %><br>
     <%= f.submit "Edit" %>
   <% end %>
-  <div>Posted by: <%= @comment.author.twitter_handle %></div><br>
 
-  <a class="reply" href="#">reply</a>
-  <% if current_user.comments.find_by_id(@comment.id) %>
-  <a class="edit" href="#">edit</a>
-  <%= link_to("delete", comment_path(@comment), method: :delete, class: "delete") %>
-  <% end %>
+  <br>
+  <a class="reply small" href="#">reply</a>
+  
   <%= render "events/comment_form" %>
-
 
   <div class="nested">
     <% @comment.replies.each do |comment| %>
