@@ -25,3 +25,8 @@ header a:hover {
   margin: 64px auto;
   width: 800px;
 }
+
+#container h1 {
+  font-size: 2em;
+  margin-bottom: 32px;
+}
