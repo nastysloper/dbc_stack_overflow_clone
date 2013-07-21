@@ -13,12 +13,9 @@ describe EventsController do
   end
 
   describe '#index' do
-    it 'assigns @events to Event.all' do
-      events = double(:events)
-      Event.stub(:all).and_return(events)
-
+    it 'assigns at least one Event to @events' do
       get :index
-      assigns(:events).should eq events
+      assigns(:events).first.kind_of?(Event).should be_true
     end
   end
 

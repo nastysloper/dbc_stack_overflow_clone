@@ -1,57 +1,100 @@
 var Handlers = {
-  click: {
-    a: {
-      reply: function(e) {
-        console.log('click a reply');
-        e.preventDefault();
-        $this = $(this)
-        $this.next('div.reply').find('form').toggle('hidden');
-        if ($this.text() == 'cancel') {
-          $this.text('reply');
-        } else {
-          $this.text('cancel')
-        }
-      },
-      upVote: function(e) {
-        console.log('click a upVote');
-        e.preventDefault();
-        var commentId = $(this).parent().data('id');
-        Helpers.post.vote(commentId, 1);
-      },
-      downVote: function(e) {
-        console.log('click a downVote');
-        e.preventDefault();
-        var commentId = $(this).parent().data('id');
-        Helpers.post.vote(commentId, -1);
-      },
-      unVote: function(e) {
-        console.log('click a unVote');
-        e.preventDefault();
-        var id = $(this).data('id');
-        Helpers.delete.vote(id);
+  reply: {
+    toggle: function(e) {
+      console.log('reply toggle');
+      e.preventDefault();
+      $this = $(this)
+      $this.next('form').toggle('hidden');
+      if ($this.text() == 'cancel') {
+        $this.text('reply');
+      } else {
+        $this.text('cancel')
       }
+    },
+    submit: function(e) {
+      console.log('reply submit');
+      e.preventDefault();
+      $.post(e.currentTarget.action, $(this).serialize(), Handlers.reply.response);
+    },
+    response: function(data) {
+      console.log('reply respone');
+      var parentId = $(data).data('id');
+      $('div.comments[data-id="' + parentId + '"]').replaceWith(data);
+      onReady();
+    }
+  },
+  edit: {
+    toggle: function(e) {
+      console.log('click a edit');
+      e.preventDefault();
+      $this = $(this)
+      $this.siblings('div.text').toggle('hidden');
+      $this.siblings('form.edit').toggle('hidden');
+      if ($this.text() == 'cancel') {
+        $this.text('edit');
+      } else {
+        $this.text('cancel')
+      }
+    },
+    submit: function(e) {
+      console.log('submit edit');
+      e.preventDefault();
+      $.post(e.currentTarget.action, $(this).serialize(), Handlers.edit.response);
+    },
+    response: function(data) {
+      console.log('response reply');
+      var commentId = $(data).find('input#vote_comment_id').attr('value');
+      $('div.comments[data-id="' + commentId + '"]').replaceWith(data);
+      onReady();
+    }
+  },
+  delete: {
+    click: function(e) {
+      console.log('delete click');
+      $.ajax(e.currentTarget.href, {"method": "DELETE", "success": Handlers.delete.response});
+      return false;
+    },
+    response: function(data) {
+      console.log('response delete');
+      $('div.comments[data-id="' + data + '"]').remove();
+    }
+  },
+  vote: {
+    submitUp: function(e) {
+      console.log('submit upVote');
+      e.preventDefault();
+      $.post(e.currentTarget.action, $(e.currentTarget).serialize(), Handlers.vote.response);
+    },
+    submitDown: function(e) {
+      console.log('submit downVote');
+      e.preventDefault();
+      $.post(e.currentTarget.action, $(e.currentTarget).serialize(), Handlers.vote.response);
+    },
+    submitDelete: function(e) {
+      console.log('submit unVote');
+      e.preventDefault();
+      $.ajax(e.currentTarget.action, {"method": "DELETE", "success": Handlers.vote.response});
+    },
+    response: function(data) {
+      console.log('response changeVote');
+      $data = $(data);
+      var commentId = $data.find('input#vote_comment_id').attr('value');
+      $('div.comments[data-id="' + commentId + '"]').find('div.votes-forms').first().html(data);
+      onReady();
     }
   }
 }
 
-var Helpers = {
-  post: {
-    vote: function(commentId, value) {
-      $.post('/votes', {"vote": {"comment_id": commentId, "value": value}})
-    }
-  },
-  delete: {
-    vote: function(id) {
-      $.ajax('/votes/' + id, {"type": "DELETE"});
-    }
-  }
-}
 var onReady = function onReady() {
   console.log('onReady');
-  $('a.reply').on('click', Handlers.click.a.reply);
-  $('a.up-vote').on('click', Handlers.click.a.upVote);
-  $('a.down-vote').on('click', Handlers.click.a.downVote);
-  $('a.un-vote').on('click', Handlers.click.a.unVote);
+  $('a.reply').on('click', Handlers.reply.toggle);
+  $('a.delete').on('click', Handlers.delete.click);
+  $('a.edit').on('click', Handlers.edit.toggle);
+  $('form.reply').on('submit', Handlers.reply.submit);
+  $('form.edit').on('submit', Handlers.edit.submit);
+  $('button.upvote').parent().on('submit', Handlers.vote.submitUp);
+  $('button.downvote').parent().on('submit', Handlers.vote.submitDown);
+  $('button.unvote').parent().on('submit', Handlers.vote.submitDelete);
 };
 
 $(document).ready(onReady);
