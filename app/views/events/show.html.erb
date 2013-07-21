@@ -33,18 +33,16 @@
         <%= f.text_area :text, size: "50x4" %><br>
         <%= f.submit "Post Comment", class: "button" %>
       <% end %>
-
-    <% else %>
-      <p><%= link_to "Sign in with twitter", "/sign_in" %> to help craft this event with a comment of your own.</p>
     <% end %>
 
   </div>
 
-  <% @event.comments.each do |comment| %>
-    <div class="event_wrapper">
-      <% @comment = comment %>
-      <%= render "show_comment" %>
-    </div>
-  <% end %>
-
+  <div class="comments_wrapper">
+    <% @event.comments.each do |comment| %>
+      <div class="event_wrapper">
+        <% @comment = comment %>
+        <%= render "show_comment" %>
+      </div>
+    <% end %>
+  </div>
 </div>

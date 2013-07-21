@@ -11,14 +11,12 @@
   <p><%= @comment.text %></p>
   <br>
 
-  <% if current_user.comments.find_by_id(@comment.id) %>
+  <% if current_user && current_user.comments.find_by_id(@comment.id) %>
     <p class="light_gray_text small">
       <a class="edit" href="#">edit</a>
       <%= link_to("delete", comment_path(@comment), method: :delete, class: "delete") %>
     </p>
   <% end %>
-
-  <br>
 
   <p class="light_gray_text small" id="vote_tally">
     <%= render "vote_tally" %>
@@ -35,9 +33,11 @@
   <% end %>
 
   <br>
-  <a class="reply small" href="#">reply</a>
-  
-  <%= render "events/comment_form" %>
+
+  <% if current_user %>
+    <a class="reply small" href="#">reply</a>
+    <%= render "events/comment_form" %>
+  <% end %>
 
   <div class="nested">
     <% @comment.replies.each do |comment| %>
