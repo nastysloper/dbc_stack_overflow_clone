@@ -8,18 +8,35 @@ class CommentsController < ApplicationController
   end
 
   def create
-    current_user.comments << Comment.new(params[:comment])
-    redirect_to '/'
+    @comment = Comment.new(params[:comment])
+    current_user.comments << @comment
+    if request.xhr?
+      @comment = @comment.parent if @comment.parent
+      render partial: "events/show_comment"
+    else
+      redirect_to (session[:return_to] || '/')
+    end
   end
 
   def update
     @comment.update_attributes(params[:comment])
-    redirect_to '/'
+    if request.xhr?
+      render partial: "events/show_comment"
+    else
+      redirect_to (session[:return_to] || '/')
+    end
   end
 
   def destroy
+    id = @comment.id
     @comment.destroy
-    redirect_to '/'
+    if request.xhr?
+      p '===================================='
+      render text: id
+    else
+      p '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+      redirect_to (session[:return_to] || '/')
+    end
   end
   
 end
