@@ -3,8 +3,12 @@ var Handlers = {
     reply: function(e) {
       console.log('submit reply');
       e.preventDefault();
-      parentId = $(this).parent().data('id')
       $.post(e.currentTarget.action, $(this).serialize(), Handlers.response.reply);
+    },
+    edit: function(e) {
+      console.log('submit edit');
+      e.preventDefault();
+      $.post(e.currentTarget.action, $(this).serialize(), Handlers.response.edit);
     },
     upVote: function(e) {
       console.log('submit upVote');
@@ -34,6 +38,12 @@ var Handlers = {
       console.log('response reply');
       var parentId = $(data).data('id');
       $('div.comments[data-id="' + parentId + '"]').replaceWith(data);
+      onReady();
+    },
+    edit: function(data) {
+      console.log('response reply');
+      var commentId = $(data).find('input#vote_comment_id').attr('value');
+      $('div.comments[data-id="' + commentId + '"]').replaceWith(data);
       onReady();
     },
     delete: function(data) {
@@ -81,6 +91,7 @@ var onReady = function onReady() {
   $('a.delete').on('click', Handlers.click.a.delete);
   $('a.edit').on('click', Handlers.click.a.edit);
   $('form.reply').on('submit', Handlers.submit.reply);
+  $('form.edit').on('submit', Handlers.submit.edit);
   $('button.upvote').parent().on('submit', Handlers.submit.upVote);
   $('button.downvote').parent().on('submit', Handlers.submit.downVote);
   $('button.unvote').parent().on('submit', Handlers.submit.unVote);

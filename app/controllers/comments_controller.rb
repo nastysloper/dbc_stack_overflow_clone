@@ -20,7 +20,11 @@ class CommentsController < ApplicationController
 
   def update
     @comment.update_attributes(params[:comment])
-    redirect_to (session[:return_to] || '/')
+    if request.xhr?
+      render partial: "events/show_comment"
+    else
+      redirect_to (session[:return_to] || '/')
+    end
   end
 
   def destroy
