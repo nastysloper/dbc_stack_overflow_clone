@@ -13,3 +13,16 @@
 <p>
   <%= link_to "create a new event", new_event_path %>
 </p>
+
+<br><br><br>
+
+
+<h3>Events You're Attending</h3>
+
+<% if current_user.attended_events.any? %>
+  <% current_user.attended_events.each do |event| %>
+    <p class="sidebar_list"><%= link_to event.title, event_path(event) %></p>
+  <% end %>
+<% else %>
+  <p>You're not attending any events.</p>
+<% end %>
