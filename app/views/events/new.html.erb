@@ -1,1 +1,13 @@
-<%= render "form" %>
+<h1>Create Your New Event</h1>
+
+<div id="sidebar">
+  <% if current_user %>
+    <%= render "sidebars/events_index" %>
+  <% else %>
+    <%= render "sidebars/no_current_user" %>
+  <% end %>
+</div>
+
+<div id="events_wrapper">
+  <%= render "form" %>
+</div>
