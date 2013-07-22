@@ -32,10 +32,8 @@ class CommentsController < ApplicationController
     id = @comment.id
     @comment.destroy
     if request.xhr?
-      p '===================================='
       render text: id
     else
-      p '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
       redirect_to (session[:return_to] || '/')
     end
   end
