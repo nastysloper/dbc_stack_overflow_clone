@@ -5,13 +5,13 @@
 <% else %>
   <h3>Your Plans</h3>
   
-  <% if current_user.attended_events.include?(@event) %>
-    <p>You're attending this event</p>
-  <% else %>
-    <p>Let @<%= @event.organizer.twitter_handle %> know that you'll be there.</p>
-    <br>
-    <div class="button center">rsvp</div>
-  <% end %>
+  <div id="rsvp_status">
+    <% if current_user.attended_events.include?(@event) %>
+      <%= render "sidebars/show_rsvp_attending" %>
+    <% else %>
+      <%= render "sidebars/show_rsvp_button" %>
+    <% end %>
+  </div>
 
 
 <% end %>
@@ -27,5 +27,5 @@
     <p><%= link_to "@#{participant.twitter_handle}", "http://twitter.com/#{participant.twitter_handle}" %></p>
   <% end %>
 <% else %>
-  <p>No one has signed up to attend this event.</p>
+  <p id="no_one">No one has signed up to attend this event.</p>
 <% end %>
