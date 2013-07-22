@@ -50,3 +50,26 @@
 .event_details p {
   margin-bottom: 0px;
 }
+
+.event_wrapper label {
+  width: 48px;
+  display: inline-block;
+}
+
+.event_wrapper select {
+  color: #333333;
+  border: 1px solid #cccccc;
+  background-color: transparent;
+  background-image: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.event_wrapper select:focus {
+  border: 1px solid #4599cD;
+}
+
+.title_input {
+  width: 100%;
+  height: 20px;
+}

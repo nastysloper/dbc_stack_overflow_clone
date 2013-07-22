@@ -1,14 +1,59 @@
-<%= form_for @event do |f| %>
-  <%= label_tag(:title, "Title") %>
-  <%= f.text_field :title %><br>
-  <%= label_tag(:description, "Description") %><br>
-  <%= f.text_area :description %><br>
-  <%= label_tag(:start, "Start") %>
-  <%= f.datetime_select :start %><br>
-  <%= label_tag(:end, "End") %>
-  <%= f.datetime_select :end %><br>
-  <%= label_tag(:photo_file, "Photo") %>
-  <%= f.file_field :photo_file %><br>
-  <%= f.submit %>
+<div class="event_wrapper">
+  <%= form_for @event do |f| %>
 
-<% end %>
+    <%= label_tag(:title, "Title:") %>
+    <%= f.text_field :title, class: "title_input" %>
+
+    <br><br>
+
+    <%= label_tag(:description, "Description:") %>
+    <%= f.text_area :description %>
+
+    <br><br>
+
+    <%= label_tag(:start, "Start:") %>
+    <%= f.datetime_select :start, 
+      ampm: true, 
+      minute_step: 5,
+      start_year: Time.now.year,
+      user_short_month: true,
+      order: [:month, :day, :year] %>
+
+    <br>
+
+    <%= label_tag(:end, "End:") %>
+    <%= f.datetime_select :end, 
+      ampm: true, 
+      minute_step: 5,
+      start_year: Time.now.year,
+      user_short_month: true,
+      order: [:month, :day, :year] %>
+
+    <br>
+    
+    <!--
+    <%= label_tag(:photo_file, "Photo:") %>
+    <%= f.file_field :photo_file %>
+    <br>
+    -->
+
+    <br>
+    
+    <%= f.submit "submit", class: "button" %>
+
+  <% end %>
+  <br>
+  <p class="small">
+    <% if @event.id != nil %>
+      <%= link_to "cancel", event_path(@event) %>
+    <% else%>
+      <%= link_to "cancel", events_path %>
+    <% end %>
+  </p>
+
+</div>
+
+
+
+
+
