@@ -118,6 +118,12 @@ textarea {
   cursor: pointer;
 }
 
+input {
+  outline: none;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
 input:focus, textarea:focus {
   border: 1px solid #4599cD;
 }
