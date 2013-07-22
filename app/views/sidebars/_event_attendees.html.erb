@@ -1,0 +1,3 @@
+<% @event.participants.each do |participant| %>
+  <p><%= link_to "@#{participant.twitter_handle}", "http://twitter.com/#{participant.twitter_handle}" %></p>
+<% end %>

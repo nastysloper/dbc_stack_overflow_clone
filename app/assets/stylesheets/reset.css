@@ -139,3 +139,7 @@ input:focus, textarea:focus {
 .small {
   font-size: .8em;
 }
+
+.no_float {
+  float: none;
+}
