@@ -28,8 +28,7 @@ var Handlers = {
       console.log('click a edit');
       e.preventDefault();
       $this = $(this)
-      $this.siblings('div.text').toggle('hidden');
-      $this.siblings('form.edit').toggle('hidden');
+      $this.parent().siblings('.comment_text').toggle('hidden');
       if ($this.text() == 'cancel') {
         $this.text('edit');
       } else {
@@ -61,25 +60,24 @@ var Handlers = {
   },
   vote: {
     submitUp: function(e) {
-      console.log('submit upVote');
+      console.log('vote submitUp');
       e.preventDefault();
       $.post(e.currentTarget.action, $(e.currentTarget).serialize(), Handlers.vote.response);
     },
     submitDown: function(e) {
-      console.log('submit downVote');
+      console.log('vote submitDown');
       e.preventDefault();
       $.post(e.currentTarget.action, $(e.currentTarget).serialize(), Handlers.vote.response);
     },
-    submitDelete: function(e) {
-      console.log('submit unVote');
-      e.preventDefault();
-      $.ajax(e.currentTarget.action, {"method": "DELETE", "success": Handlers.vote.response});
+    clickDelete: function(e) {
+      console.log('vote clickDelete');
+      $.ajax(e.currentTarget.href, {"method": "DELETE", "success": Handlers.vote.response});
+      return false;
     },
     response: function(data) {
-      console.log('response changeVote');
-      $data = $(data);
-      var commentId = $data.find('input#vote_comment_id').attr('value');
-      $('div.comments[data-id="' + commentId + '"]').find('div.votes-forms').first().html(data);
+      console.log('vote response');
+      var commentId = $(data).data('comment-id');
+      $('[data-comment-id="' + commentId + '"]').replaceWith(data);
       onReady();
     }
   }
@@ -87,14 +85,29 @@ var Handlers = {
 
 var onReady = function onReady() {
   console.log('onReady');
+  $('a.reply').off('click');
   $('a.reply').on('click', Handlers.reply.toggle);
+  
+  $('a.delete').off('click');
   $('a.delete').on('click', Handlers.delete.click);
+  
+  $('a.edit').off('click');
   $('a.edit').on('click', Handlers.edit.toggle);
+  
+  $('form.reply').off('submit');
   $('form.reply').on('submit', Handlers.reply.submit);
+  
+  $('form.edit').off('submit');
   $('form.edit').on('submit', Handlers.edit.submit);
+  
+  $('button.upvote').parent().off().on('submit');
   $('button.upvote').parent().on('submit', Handlers.vote.submitUp);
+  
+  $('button.downvote').parent().off().on('submit');
   $('button.downvote').parent().on('submit', Handlers.vote.submitDown);
-  $('button.unvote').parent().on('submit', Handlers.vote.submitDelete);
+  
+  $('a.delete-vote').off('click');
+  $('a.delete-vote').on('click', Handlers.vote.clickDelete);
 };
 
 $(document).ready(onReady);

@@ -8,7 +8,12 @@
     <% end %>
   </p>
 
-  <p><%= @comment.text %></p>
+  <p class="comment_text"><%= @comment.text %></p>
+  <%= form_for @comment, html: {class: "edit comment_text hidden"} do |f| %>
+     <%= f.hidden_field :parent_id %>
+     <%= f.text_area :text, size: "50x4" %><br>
+     <%= f.submit "Save Edits" %>
+  <% end %>
   <br>
 
   <% if current_user && current_user.comments.find_by_id(@comment.id) %>
@@ -19,7 +24,7 @@
   <% end %>
 
   <p class="light_gray_text small" id="vote_tally">
-    <%= render "vote_tally" %>
+    <%= render "events/vote_tally" %>
   </p>
 
   <div class="votes-forms">
