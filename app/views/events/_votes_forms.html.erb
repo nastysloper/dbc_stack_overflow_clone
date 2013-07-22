@@ -4,15 +4,15 @@
 
 <% if vote %>
 
-  <p class="light_gray_text small">
+  <p class="light_gray_text small" data-comment-id="<%= @comment.id %>">
     <%= vote.value == 1 ? "You upvoted this comment." : "You downvoted this comment." %>
     <br>
-    <%= link_to "withdraw your vote", vote_path(vote), method: :delete %>
+    <%= link_to "withdraw your vote", vote_path(vote), method: :delete, class: "delete-vote" %>
   </p>
   
 <% elsif current_user %>
 
-  <div class="vote_forms_wrap"?
+  <div class="vote_forms_wrap" data-comment-id="<%= @comment.id %>">
     <%= form_for Vote.new(comment: @comment, value: 1) do |f|%>
       <%= f.hidden_field :comment_id %>
       <%= f.hidden_field :value %>
