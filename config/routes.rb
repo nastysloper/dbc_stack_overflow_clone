@@ -12,4 +12,6 @@ StackClone::Application.routes.draw do
   match '/sign_in', to: 'sessions#sign_in'
   match '/sign_out', to: 'sessions#sign_out'
 
+  match '/rsvp', to: 'rsvps#rsvp'
+
 end

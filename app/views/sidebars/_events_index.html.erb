@@ -2,7 +2,7 @@
 
 <% if current_user.created_events.any? %>
   <% current_user.created_events.each do |event| %>
-    <p class="sidebar_list"><%= link_to event.title, event_path(event) %></p>
+    <p><%= link_to event.title, event_path(event) %></p><br>
   <% end %>
 <% else %>
   <p>You have no upcoming events</p>
@@ -16,7 +16,7 @@
 
 <% if current_user.attended_events.any? %>
   <% current_user.attended_events.each do |event| %>
-    <p class="sidebar_list"><%= link_to event.title, event_path(event) %></p>
+    <p><%= link_to event.title, event_path(event) %></p><br>
   <% end %>
 <% else %>
   <p>You're not attending any events.</p>
